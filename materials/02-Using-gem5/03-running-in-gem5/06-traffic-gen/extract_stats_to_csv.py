@@ -24,28 +24,85 @@ def extract_stats(stats_file):
     stats['cpu_cpi'] = (extract_stat(content, r"system\.cpu\.cpi\s+([\d\.]+)"), "Cycles per instruction")
 
     # ICache Statistics
-    stats['icache_miss_rate'] = (extract_stat(content, r"system\.cpu\.icache\.overallMissRate::total\s+([\d\.]+)"), "Misses per access")
-    stats['icache_avg_miss_latency'] = (extract_stat(content, r"system\.cpu\.icache\.demandAvgMissLatency::total\s+([\d\.]+)"), "Ticks")
+    icache_miss_rate = extract_stat(content, r"system\.cpu\.icache\.overallMissRate::total\s+([\d\.]+)"), "Misses per access"
+    stats['icache_miss_rate'] = icache_miss_rate
+    icache_avg_miss_latency = extract_stat(content, r"system\.cpu\.icache\.demandAvgMissLatency::total\s+([\d\.]+)"), "ns"
+    if icache_avg_miss_latency[0] is not None:
+        stats['icache_avg_miss_latency'] = (icache_avg_miss_latency[0] / 1000, "ns") # Convert ticks to ns
+    else:
+        stats['icache_avg_miss_latency'] = (None, "ns")
 
     # DCache Statistics
-    stats['dcache_miss_rate'] = (extract_stat(content, r"system\.cpu\.dcache\.overallMissRate::total\s+([\d\.]+)"), "Misses per access")
-    stats['dcache_avg_miss_latency'] = (extract_stat(content, r"system\.cpu\.dcache\.demandAvgMissLatency::total\s+([\d\.]+)"), "Ticks")
+    dcache_miss_rate = extract_stat(content, r"system\.cpu\.dcache\.overallMissRate::total\s+([\d\.]+)"), "Misses per access"
+    stats['dcache_miss_rate'] = dcache_miss_rate
+    dcache_avg_miss_latency = extract_stat(content, r"system\.cpu\.dcache\.demandAvgMissLatency::total\s+([\d\.]+)"), "ns"
+    if dcache_avg_miss_latency[0] is not None:
+        stats['dcache_avg_miss_latency'] = (dcache_avg_miss_latency[0] / 1000, "ns") # Convert ticks to ns
+    else:
+        stats['dcache_avg_miss_latency'] = (None, "ns")
 
     # Traffic Generator Statistics
-    stats['trafficgen_avg_read_latency'] = (extract_stat(content, r"system\.trafficgen\.avgReadLatency\s+([\d\.]+)"), "Ticks")
-    stats['trafficgen_avg_write_latency'] = (extract_stat(content, r"system\.trafficgen\.avgWriteLatency\s+([\d\.]+)"), "Ticks")
-    stats['trafficgen_read_bw'] = (extract_stat(content, r"system\.trafficgen\.readBW\s+([\d\.]+)"), "Bytes per second")
-    stats['trafficgen_write_bw'] = (extract_stat(content, r"system\.trafficgen\.writeBW\s+([\d\.]+)"), "Bytes per second")
+    trafficgen_avg_read_latency = extract_stat(content, r"system\.trafficgen\.avgReadLatency\s+([\d\.]+)"), "ns"
+    if trafficgen_avg_read_latency[0] is not None:
+        stats['trafficgen_avg_read_latency'] = (trafficgen_avg_read_latency[0] / 1000, "ns")  # Convert ticks to ns
+    else:
+        stats['trafficgen_avg_read_latency'] = (None, "ns")
+
+    trafficgen_avg_write_latency = extract_stat(content, r"system\.trafficgen\.avgWriteLatency\s+([\d\.]+)"), "ns"
+    if trafficgen_avg_write_latency[0] is not None:
+        stats['trafficgen_avg_write_latency'] = (trafficgen_avg_write_latency[0] / 1000, "ns") # Convert ticks to ns
+    else:
+        stats['trafficgen_avg_write_latency'] = (None, "ns")
+
+    trafficgen_read_bw = extract_stat(content, r"system\.trafficgen\.readBW\s+([\d\.]+)"), "MB/s"
+    if trafficgen_read_bw[0] is not None:
+        stats['trafficgen_read_bw'] = (trafficgen_read_bw[0] / 1000000, "MB/s")  # Convert B/s to MB/s
+    else:
+        stats['trafficgen_read_bw'] = (None, "MB/s")
+
+    trafficgen_write_bw = extract_stat(content, r"system\.trafficgen\.writeBW\s+([\d\.]+)"), "MB/s"
+    if trafficgen_write_bw[0] is not None:
+        stats['trafficgen_write_bw'] =  (trafficgen_write_bw[0] / 1000000, "MB/s") # Convert B/s to MB/s
+    else:
+        stats['trafficgen_write_bw'] = (None, "MB/s")
 
     # DRAM Statistics (Mem_ctrl1)
-    stats['dram1_avg_mem_acc_lat'] = (extract_stat(content, r"system\.mem_ctrl1\.dram\.avgMemAccLat\s+([\d\.]+)"), "Ticks")
-    stats['dram1_avg_rd_bw'] = (extract_stat(content, r"system\.mem_ctrl1\.dram\.bwRead::total\s+([\d\.]+)"), "Bytes per second")
-    stats['dram1_avg_wr_bw'] = (extract_stat(content, r"system\.mem_ctrl1\.dram\.bwWrite::total\s+([\d\.]+)"), "Bytes per second")
+    dram1_avg_mem_acc_lat = extract_stat(content, r"system\.mem_ctrl1\.dram\.avgMemAccLat\s+([\d\.]+)"), "ns"
+    if dram1_avg_mem_acc_lat[0] is not None:
+        stats['dram1_avg_mem_acc_lat'] = (dram1_avg_mem_acc_lat[0] / 1000, "ns")  # Convert ticks to ns
+    else:
+        stats['dram1_avg_mem_acc_lat'] = (None, "ns")
+
+    dram1_avg_rd_bw = extract_stat(content, r"system\.mem_ctrl1\.dram\.bwRead::total\s+([\d\.]+)"), "MB/s"
+    if dram1_avg_rd_bw[0] is not None:
+        stats['dram1_avg_rd_bw'] = (dram1_avg_rd_bw[0] / 1048576, "MB/s") # Convert B/s to MB/s
+    else:
+        stats['dram1_avg_rd_bw'] = (None, "MB/s")
+
+    dram1_avg_wr_bw = extract_stat(content, r"system\.mem_ctrl1\.dram\.bwWrite::total\s+([\d\.]+)"), "MB/s"
+    if dram1_avg_wr_bw[0] is not None:
+        stats['dram1_avg_wr_bw'] = (dram1_avg_wr_bw[0] / 1048576, "MB/s") # Convert B/s to MB/s
+    else:
+        stats['dram1_avg_wr_bw'] = (None, "MB/s")
 
     # DRAM Statistics (Mem_ctrl2)
-    stats['dram2_avg_mem_acc_lat'] = (extract_stat(content, r"system\.mem_ctrl2\.dram\.avgMemAccLat\s+([\d\.]+)"), "Ticks")
-    stats['dram2_avg_rd_bw'] = (extract_stat(content, r"system\.mem_ctrl2\.dram\.bwRead::total\s+([\d\.]+)"), "Bytes per second")
-    stats['dram2_avg_wr_bw'] = (extract_stat(content, r"system\.mem_ctrl2\.dram\.bwWrite::total\s+([\d\.]+)"), "Bytes per second")
+    dram2_avg_mem_acc_lat = extract_stat(content, r"system\.mem_ctrl2\.dram\.avgMemAccLat\s+([\d\.]+)"), "ns"
+    if dram2_avg_mem_acc_lat[0] is not None:
+        stats['dram2_avg_mem_acc_lat'] = (dram2_avg_mem_acc_lat[0] / 1000, "ns")  # Convert ticks to ns
+    else:
+        stats['dram2_avg_mem_acc_lat'] = (None, "ns")
+
+    dram2_avg_rd_bw = extract_stat(content, r"system\.mem_ctrl2\.dram\.bwRead::total\s+([\d\.]+)"), "MB/s"
+    if dram2_avg_rd_bw[0] is not None:
+        stats['dram2_avg_rd_bw'] = (dram2_avg_rd_bw[0] / 1048576, "MB/s") # Convert B/s to MB/s
+    else:
+        stats['dram2_avg_rd_bw'] = (None, "MB/s")
+
+    dram2_avg_wr_bw =  extract_stat(content, r"system\.mem_ctrl2\.dram\.bwWrite::total\s+([\d\.]+)"), "MB/s"
+    if dram2_avg_wr_bw[0] is not None:
+        stats['dram2_avg_wr_bw'] = (dram2_avg_wr_bw[0] / 1048576, "MB/s") # Convert B/s to MB/s
+    else:
+        stats['dram2_avg_wr_bw'] = (None, "MB/s")
 
     return stats
 
