@@ -25,3 +25,28 @@ cache_hierarchy = MESITwoLevelCacheHierarchy(
 
 # Set up the system memory.
 memory = SingleChannelDDR3_1600(size="3GB")
+
+processor = SimpleSwitchableProcessor(starting_core_type= CPUTypes.TIMING,
+            switch_core_type=CPUTypes.O3,
+            isa=ISA.X86,
+            num_cores=2)
+
+board =X86Board(clk_freq="3GHz", processor=processor, memory=memory,
+                cache_hierarchy=cache_hierarchy)
+
+command = ("m5 exit;" + "echo 'This is running on O2 CPU cores.';"
+           +"sleep 1;"
+           +"m5 exit;")
+
+board.set_kernel_disk_workload(
+    kernel=obtain_resource("x86-linux-kernel-4.4.186"),
+    disk_image=obtain_resource("x86-ubuntu-18.04-img"),
+    readfile_contents=command
+)
+
+simulator = Simulator(
+    board=board,
+    on_exit_event={ExitEvent.EXIT: (func() for func in [processor.switch])}
+)
+
+simulator.run()

@@ -27,6 +27,19 @@ from m5.objects import TournamentBP
 class MyOutOfOrderCore(BaseCPUCore):
     def __init__(self, width, rob_size, num_int_regs, num_fp_regs):
         super().__init__(ArmO3CPU(), ISA.ARM)
+        self.core.fetchWidth =width
+        self.core.decodeWidth = width
+        self.core.renameWidth = width
+        self.core.issueWidth = width
+        self.core.wbWidth = width
+        self.core.commitWidth = width
+        self.core.numROBEntries = rob_size
+        self.core.numPhysIntRegs = num_int_regs
+        self.core.numPhysFloatRegs = num_fp_regs
+
+        self.core.branchPred = TournamentBP()
+        self.core.LQEntries = 128
+        self.core.SQEntries = 128
 
 
 class MyOutOfOrderProcessor(BaseCPUProcessor):
@@ -39,8 +52,8 @@ class MyOutOfOrderProcessor(BaseCPUProcessor):
         :param num_int_regs: determines the size of the vector/floating point
         register file.
         """
-        pass
-
+        core = [MyOutOfOrderCore(width, rob_size, num_int_regs, num_fp_regs)]
+        super().__init__(core)
 
 main_memory = SingleChannelDDR4_2400(size="2GB")
 

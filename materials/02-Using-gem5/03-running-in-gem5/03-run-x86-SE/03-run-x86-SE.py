@@ -48,7 +48,7 @@ gem5 -re 03-run-x86-SE.py
 '''
 
 
-binary_path = Path("/workspaces/2024/materials/02-Using-gem5/03-running-in-gem5/02-annotate-this/complete/02-annotate-this")
+binary_path = Path("/home/azureuser/gem5_workspace/googlesource/2024/materials/02-Using-gem5/03-running-in-gem5/02-annotate-this/02-annotate-this")
 
 
 cache_hierarchy = PrivateL1CacheHierarchy(
@@ -78,17 +78,28 @@ board.set_se_binary_workload(
 )
 
 # define a workbegin handler
-
+def workbegin_handler():
+    print("Workbegin event triggered")
+    m5.debug.flags["ExecAll"].enable()
+    yield False
+    # Add any additional logic you want to execute on workbegin
 #
 
 # define a workend handler
-
+def workend_handler():
+    print("Workend event triggered")
+    m5.debug.flags["ExecAll"].disable()
+    yield False
+    # Add any additional logic you want to execute on workend
 #
 
 simulator = Simulator(
     board=board,
 # setup handler for ExitEvent.WORKBEGIN and ExitEvent.WORKEND
-
+    on_exit_event={
+        ExitEvent.WORKBEGIN: workbegin_handler(),
+        ExitEvent.WORKEND: workend_handler()
+    }
 #
 )
 

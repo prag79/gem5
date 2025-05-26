@@ -1,0 +1,58 @@
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 24.0.0.0
+gem5 compiled May  9 2025 10:04:08
+gem5 started May 21 2025 12:14:45
+gem5 executing on gem5vm, pid 18621
+command line: gem5 -re --outdir=dynamic 05-run-arm-SE.py --workload-type=dynamic
+
+Time to redirect the library path
+Global frequency set at 1000000000000 ticks per second
+Workbegin handler
+3063792000: board.processor.cores.core: A0 T0 : 0xc04 @m5_work_begin+4    :   ret                      : IntAlu :   flags=(IsInteger|IsControl|IsIndirectControl|IsUncondControl|IsReturn)
+3063793000: board.processor.cores.core: A0 T0 : 0xa6c @main+20    :   movz   x2, #36, #0       : IntAlu :  D=0x0000000000000024  flags=(IsInteger)
+3063794000: board.processor.cores.core: A0 T0 : 0xa70 @main+24    :   adrp   x0, #0            : IntAlu :  D=0x0000000000000000  flags=(IsInteger)
+3063795000: board.processor.cores.core: A0 T0 : 0xa74 @main+28    :   add   x1, x0, #3136      : IntAlu :  D=0x0000000000000c40  flags=(IsInteger)
+3063796000: board.processor.cores.core: A0 T0 : 0xa78 @main+32    :   movz   w0, #1, #0        : IntAlu :  D=0x0000000000000001  flags=(IsInteger)
+3063797000: board.processor.cores.core: A0 T0 : 0xa7c @main+36    :   bl   <_init+176>         : IntAlu :  D=0x0000000000000a80  flags=(IsInteger|IsControl|IsDirectControl|IsUncondControl|IsCall)
+3063847000: board.processor.cores.core: A0 T0 : 0x900 @_init+176    :   adrp   x16, #126976      : IntAlu :  D=0x000000000001f000  flags=(IsInteger)
+3063848000: board.processor.cores.core: A0 T0 : 0x904 @_init+180    :   ldr   x17, [x16, #4008]  : MemRead :  D=0x0000003fffbd19a0 A=0x1ffa8  flags=(IsInteger|IsLoad)
+3063899000: board.processor.cores.core: A0 T0 : 0x908 @_init+184    :   add   x16, x16, #4008    : IntAlu :  D=0x000000000001ffa8  flags=(IsInteger)
+3063900000: board.processor.cores.core: A0 T0 : 0x90c @_init+188    :   br   x17                 : IntAlu :   flags=(IsInteger|IsControl|IsIndirectControl|IsUncondControl)
+3063964000: board.processor.cores.core: A0 T0 : 0x3fffbd19a0 @_end+274873391496    : stp                       
+3063964000: board.processor.cores.core: A0 T0 : 0x3fffbd19a0 @_end+274873391496. 0 :   addxi_uop   ureg0, sp, #-48 : IntAlu :  D=0x0000007ffffefba0  flags=(IsInteger|IsMicroop|IsDelayedCommit|IsFirstMicroop)
+3063964000: board.processor.cores.core: A0 T0 : 0x3fffbd19a0 @_end+274873391496. 1 :   strxi_uop   x29, [ureg0] : MemWrite :  D=0x0000007ffffefbd0 A=0x7ffffefba0  flags=(IsInteger|IsStore|IsMicroop|IsDelayedCommit)
+3063965000: board.processor.cores.core: A0 T0 : 0x3fffbd19a0 @_end+274873391496. 2 :   strxi_uop   x30, [ureg0, #8] : MemWrite :  D=0x0000000000000a80 A=0x7ffffefba8  flags=(IsInteger|IsStore|IsMicroop|IsDelayedCommit)
+3063966000: board.processor.cores.core: A0 T0 : 0x3fffbd19a0 @_end+274873391496. 3 :   addxi_uop   sp, ureg0, #0 : IntAlu :  D=0x0000007ffffefba0  flags=(IsInteger|IsMicroop|IsLastMicroop)
+3063967000: board.processor.cores.core: A0 T0 : 0x3fffbd19a4 @_end+274873391500    :   adrp   x3, #876544       : IntAlu :  D=0x0000003fffca7000  flags=(IsInteger)
+3063968000: board.processor.cores.core: A0 T0 : 0x3fffbd19a8 @_end+274873391504    :   add   x29, sp, #0        : IntAlu :  D=0x0000007ffffefba0  flags=(IsInteger)
+3063969000: board.processor.cores.core: A0 T0 : 0x3fffbd19ac @_end+274873391508    :   ldrb   w3, [w3, #1304]   : MemRead :  D=0x0000000000000001 A=0x3fffca7518  flags=(IsInteger|IsLoad)
+3063971000: board.processor.cores.core: A0 T0 : 0x3fffbd19b0 @_end+274873391512    : stp                       
+3063971000: board.processor.cores.core: A0 T0 : 0x3fffbd19b0 @_end+274873391512. 0 :   addxi_uop   ureg0, sp, #16 : IntAlu :  D=0x0000007ffffefbb0  flags=(IsInteger|IsMicroop|IsDelayedCommit|IsFirstMicroop)
+3063971000: board.processor.cores.core: A0 T0 : 0x3fffbd19b0 @_end+274873391512. 1 :   strxi_uop   x19, [ureg0] : MemWrite :  D=0x0000007ffffefd68 A=0x7ffffefbb0  flags=(IsInteger|IsStore|IsMicroop|IsDelayedCommit)
+3063972000: board.processor.cores.core: A0 T0 : 0x3fffbd19b0 @_end+274873391512. 2 :   strxi_uop   x20, [ureg0, #8] : MemWrite :  D=0x0000000000000001 A=0x7ffffefbb8  flags=(IsInteger|IsStore|IsMicroop|IsLastMicroop)
+3063974000: board.processor.cores.core: A0 T0 : 0x3fffbd19b4 @_end+274873391516    :   sbfm   x19, x0, #0, #31  : IntAlu :  D=0x0000000000000001  flags=(IsInteger)
+3063975000: board.processor.cores.core: A0 T0 : 0x3fffbd19b8 @_end+274873391520    :   cbz   w3, <_end+274873391564> : IntAlu :   flags=(IsInteger|IsControl|IsDirectControl|IsCondControl)
+3063976000: board.processor.cores.core: A0 T0 : 0x3fffbd19bc @_end+274873391524    :   orr   x0, xzr, x19       : IntAlu :  D=0x0000000000000001  flags=(IsInteger)
+3064026000: board.processor.cores.core: A0 T0 : 0x3fffbd19c0 @_end+274873391528    :   movz   x8, #64, #0       : IntAlu :  D=0x0000000000000040  flags=(IsInteger)
+3064027000: board.processor.cores.core: A0 T0 : 0x3fffbd19c4 @_end+274873391532    :   svc   #0x0               : IntAlu :   flags=(IsSerializeAfter|IsNonSpeculative|IsSyscall)
+This will be output to standard out
+3064028000: board.processor.cores.core: A0 T0 : 0x3fffbd19c8 @_end+274873391536    :   orr   x19, xzr, x0       : IntAlu :  D=0x0000000000000024  flags=(IsInteger)
+3064029000: board.processor.cores.core: A0 T0 : 0x3fffbd19cc @_end+274873391540    :   adds   x0, #4096         : IntAlu :  D=0x0000000000000000  flags=(IsInteger)
+3064030000: board.processor.cores.core: A0 T0 : 0x3fffbd19d0 @_end+274873391544    :   b.hi   <_end+274873391644> : IntAlu :   flags=(IsControl|IsDirectControl|IsCondControl)
+3064031000: board.processor.cores.core: A0 T0 : 0x3fffbd19d4 @_end+274873391548    :   orr   x0, xzr, x19       : IntAlu :  D=0x0000000000000024  flags=(IsInteger)
+3064032000: board.processor.cores.core: A0 T0 : 0x3fffbd19d8 @_end+274873391552    : ldp                       
+3064032000: board.processor.cores.core: A0 T0 : 0x3fffbd19d8 @_end+274873391552. 0 :   addxi_uop   ureg0, sp, #16 : IntAlu :  D=0x0000007ffffefbb0  flags=(IsInteger|IsMicroop|IsDelayedCommit|IsFirstMicroop)
+3064032000: board.processor.cores.core: A0 T0 : 0x3fffbd19d8 @_end+274873391552. 1 :   ldp_uop   x19, x20, [ureg0] : MemRead :  D=0x0000000000000001 A=0x7ffffefbb0  flags=(IsInteger|IsLoad|IsMicroop|IsLastMicroop)
+3064034000: board.processor.cores.core: A0 T0 : 0x3fffbd19dc @_end+274873391556    : ldp                       
+3064034000: board.processor.cores.core: A0 T0 : 0x3fffbd19dc @_end+274873391556. 0 :   ldp_uop   x29, x30, [sp] : MemRead :  D=0x0000000000000a80 A=0x7ffffefba0  flags=(IsInteger|IsLoad|IsMicroop|IsDelayedCommit|IsFirstMicroop)
+3064035000: board.processor.cores.core: A0 T0 : 0x3fffbd19dc @_end+274873391556. 1 :   addxi_uop   sp, sp, #48  : IntAlu :  D=0x0000007ffffefbd0  flags=(IsInteger|IsMicroop|IsLastMicroop)
+3064036000: board.processor.cores.core: A0 T0 : 0x3fffbd19e0 @_end+274873391560    :   ret                      : IntAlu :   flags=(IsInteger|IsControl|IsIndirectControl|IsUncondControl|IsReturn)
+3064086000: board.processor.cores.core: A0 T0 : 0xa80 @main+40    :   movz   x1, #0, #0        : IntAlu :  D=0x0000000000000000  flags=(IsInteger)
+3064087000: board.processor.cores.core: A0 T0 : 0xa84 @main+44    :   movz   x0, #0, #0        : IntAlu :  D=0x0000000000000000  flags=(IsInteger)
+3064088000: board.processor.cores.core: A0 T0 : 0xa88 @main+48    :   bl   <m5_work_end>       : IntAlu :  D=0x0000000000000a8c  flags=(IsInteger|IsControl|IsDirectControl|IsUncondControl|IsCall)
+3064089000: board.processor.cores.core: A0 T0 : 0xc08 @m5_work_end    :   gem5op                   : IntAlu :  D=0x0000000000000000  flags=(IsInteger|IsNonSpeculative|IsUnverifiable|IsPseudo)
+List of Files & Folders:
+complete, .., static, 05-run-arm-SE.py, dynamic, ., 
+Simulation Done

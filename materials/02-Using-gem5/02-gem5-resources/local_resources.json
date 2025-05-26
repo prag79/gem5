@@ -7,13 +7,13 @@
         "size": 1,
         "tags": [],
         "is_zipped": false,
-        "md5sum": "2a0689d8a0168b3d5613b01dac22b9ec",
+        "md5sum": "fd9d9a27fa74de48a7077e8069ec47d3",
         "source": "",
-        "url": "file:///workspaces/2024/materials/02-Using-gem5/02-gem5-resources/pattern",
+        "url": "file:///home/azureuser/gem5_workspace/googlesource/2024/materials/02-Using-gem5/02-gem5-resources/pattern",
         "code_examples": [],
         "license": "",
         "author": [
-            "Harshil Patel"
+            "Pragnajit Datta Roy"
         ],
         "source_url": "",
         "resource_version": "1.0.0",

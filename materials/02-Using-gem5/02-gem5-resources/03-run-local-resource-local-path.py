@@ -31,7 +31,10 @@ board = SimpleBoard(
 )
 
 # Add the binary to the board using `BinaryResource`
-
+binary = BinaryResource(
+    local_path= "/home/azureuser/gem5_workspace/googlesource/2024/materials/02-Using-gem5/02-gem5-resources/pattern"
+)
+# The binary is a simple hello world program that prints "Hello World!" to the
 board.set_se_binary_workload(binary)
 
 simulator = Simulator(board=board)

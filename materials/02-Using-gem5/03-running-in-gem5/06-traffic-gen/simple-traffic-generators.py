@@ -44,6 +44,7 @@ cache_hierarchy = MyPrivateL1SharedL2CacheHierarchy()
 memory = SingleChannelDDR3_1600()
 
 # Add generator here
+generator = RandomGenerator(num_cores=1, rate="1GB/s")
 
 motherboard = TestBoard(
     clk_freq="3GHz",

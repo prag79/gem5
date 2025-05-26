@@ -46,6 +46,6 @@ board = SimpleBoard(
 )
 
 # Add binary to the board
-
+board.set_se_binary_workload(obtain_resource("x86-hello64-static"))
 simulator = Simulator(board=board)
 simulator.run()

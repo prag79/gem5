@@ -1,0 +1,14 @@
+gem5 Simulator System.  https://www.gem5.org
+gem5 is copyrighted software; use the --copyright option for details.
+
+gem5 version 24.0.0.0
+gem5 compiled May  9 2025 10:04:08
+gem5 started May 25 2025 20:31:24
+gem5 executing on gem5vm, pid 10663
+command line: gem5 -re --outdir=processor_traffic_logs processor_traffic.py
+
+info: Using default config
+ARM binary path: /home/azureuser/.cache/gem5/arm-hello64-static
+Global frequency set at 1000000000000 ticks per second
+Hello world!
+Exiting @ tick 145540000 because exiting with last active thread context.

@@ -35,9 +35,9 @@ from gem5.components.processors.cpu_types import CPUTypes
 from gem5.resources.resource import BinaryResource
 from gem5.simulate.exit_event import ExitEvent
 from gem5.simulate.simulator import Simulator
-from m5.objects import RedirectPath
+
 from gem5.isas import ISA
-from m5.core import setInterpDir
+
 import m5.debug
 
 # helper libraries
@@ -72,7 +72,7 @@ args = parser.parse_args()
 
 
 binary_path = Path(
-    "/workspaces/2024/materials/02-Using-gem5/03-running-in-gem5/"
+    "/home/azureuser/gem5_workspace/googlesource/2024/materials/02-Using-gem5/03-running-in-gem5/"
     f"04-cross-compile-workload/04-cross-compile-this-{args.workload_type}")
 
 
@@ -100,7 +100,11 @@ if (args.workload_type == "dynamic"):
     print("Time to redirect the library path")
 # redirect the library path when running the dynamic binary that does not have
 # the same ISA as the host machine
-
+    from m5.objects import RedirectPath
+    from m5.core import setInterpDir
+    setInterpDir("/usr/aarch64-linux-gnu/")
+    board.redirect_paths = [RedirectPath(app_path=f"/lib",
+                            host_paths=[f"/usr/aarch64-linux-gnu/lib"])]
 #
 
 board.set_se_binary_workload(
